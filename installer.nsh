@@ -21,7 +21,7 @@ InstallDir "${INSTALL_DIR}"
 
 # アイコン
 Icon "${MUI_ICON}"
-UninstallIcon "${MUI_ICON}"
+UninstallIcon "${MUI_UNICON}"
 
 # ページ
 !insertmacro MUI_PAGE_WELCOME
@@ -52,7 +52,7 @@ Section
     # スタート メニューにショートカットを登録
     CreateDirectory "$SMPROGRAMS\\${PRODUCT_NAME}"
     SetOutPath "$INSTDIR"
-    CreateShortcut "$SMPROGRAMS\\${PRODUCT_NAME}\\${PRODUCT_NAME}.lnk" "$INSTDIR\\${EXEC_FILE}" "" "$INSTDIR\${PRODUCT_NAME}.exe,0"
+    CreateShortcut "$SMPROGRAMS\\${PRODUCT_NAME}\\${PRODUCT_NAME}.lnk" "$INSTDIR\\${EXEC_FILE}" "" "$INSTDIR\${PRODUCT_NAME}.exe"
 
     # レジストリに登録
     WriteRegStr HKLM "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\${PRODUCT_NAME}" "DisplayName" "${PRODUCT_NAME}"

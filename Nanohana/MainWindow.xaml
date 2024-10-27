@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window
+    x:Class="Nanohana.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Nanohana"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Nanohana"
+    mc:Ignorable="d">
+    <Window.SystemBackdrop>
+        <MicaBackdrop Kind="BaseAlt"/>
+    </Window.SystemBackdrop>
+    <!-- <Window.SystemBackdrop>
+        <DesktopAcrylicBackdrop />
+    </Window.SystemBackdrop> -->
+    <Grid RowDefinitions="40, *" x:Name="Window">
+        <Grid Grid.Row="0">
+            <Grid ColumnDefinitions="Auto, *">
+                <MenuBar Grid.Column="0">
+                    <MenuBarItem Title="File" x:Uid="File">
+                        <MenuFlyoutItem Text="Exit" x:Uid="Exit" Click="ClickExit" />
+                    </MenuBarItem>
+                    <MenuBarItem Title="Help" x:Uid="Help">
+                        <MenuFlyoutItem Text="About" x:Uid="About" Click="OpenWebsite" />
+                    </MenuBarItem>
+                </MenuBar>
+                <Grid x:Name="AppTitleBar" Grid.Column="1" />
+            </Grid>
+            <Grid>
+                <TextBlock x:Name="AppTitleTextBlock"
+                    x:Uid="AppTitleText"
+                    Text="Nanohana"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center" />
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" ColumnDefinitions="Auto, *" Margin="12">
+            <Grid Margin="0, 0, 6, 0" Grid.Column="0" RowDefinitions="Auto, *, Auto">
+                <!-- 検索 -->
+                <TextBox Grid.Row="0" PlaceholderText="Search" x:Uid="Search" TextChanged="Search_TextChanged" />
+                <Grid Grid.Row="1" Margin="0, 8, 0, 0">
+                    <ScrollViewer>
+                        <ListView Name="LoginItemList" Width="253" IsItemClickEnabled="True" ItemClick="ListView_LoginItemClick">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="local:LoginItem">
+                                    <Grid RowDefinitions="*, *" Margin="0, 8, 0, 8">
+                                        <TextBlock Grid.Row="0" Text="{x:Bind Site}" FontWeight="Bold" />
+                                        <TextBlock Grid.Row="1" Text="{x:Bind Id}" Margin="0, 4, 0, 0" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollViewer>
+                </Grid>
+                <!-- 削除 -->
+                <Button Grid.Row="2" Margin="0, 8, 0, 0" HorizontalAlignment="Stretch" Click="DeleteLoginItem">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE74D;" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+            <Grid Margin="6, 0, 0, 0" Grid.Column="1">
+                <Grid RowDefinitions="Auto, *, Auto">
+                    <StackPanel Grid.Row="0">
+                        <!-- サイト -->
+                        <Grid ColumnDefinitions="Auto, Auto, Auto, *, Auto" Margin="0, 8, 0, 0">
+                            <TextBlock x:Uid="TextBlock_Site" Grid.Column="0" Text="Web site:" Margin="0, 7, 8, 0" />
+                            <HyperlinkButton Grid.Column="1" Content="Set the URL" Name="LinkButton"/>
+                            <Button Grid.Column="2" Margin="4, 0, 0, 0" Click="ClickEditSite" Name="EditSiteButton">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE70F;" />
+                                </StackPanel>
+                            </Button>
+                            <TextBox Grid.Column="3" Visibility="Collapsed" Name="EditSite" />
+                            <Button Grid.Column="4" Margin="4, 0, 0, 0" Click="ClickUpdateSite" Name="UpdateSite" HorizontalAlignment="Stretch" Visibility="Collapsed">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE777;" />
+                                </StackPanel>
+                            </Button>
+                            <TextBlock Text="URL is not entered" Name="URLIsNotEntered" x:Uid="URLIsNotEntered" Visibility="Collapsed" />
+                            <TextBlock Text="Invalid URL" Name="InvalidURL" x:Uid="InvalidURL" Visibility="Collapsed" />
+                            <TextBlock Text="Set the URL" Name="SetTheURL" x:Uid="SetTheURL" Visibility="Collapsed" />
+                        </Grid>
+                        <!-- ID -->
+                        <Grid ColumnDefinitions="Auto, *, Auto" Margin="0, 8, 0, 0">
+                            <TextBlock Grid.Column="0" Text="ID:" Margin="0, 4, 8, 0" />
+                            <TextBox Grid.Column="1" Name="UserId" />
+                            <Button Grid.Column="2" Margin="4, 0, 0, 0" Click="CopyId">
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8C8;" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                        <!-- パスワード -->
+                        <Grid Margin="0, 8, 0, 0">
+                            <StackPanel>
+                                <Grid ColumnDefinitions="Auto, *, Auto">
+                                    <TextBlock x:Uid="TextBlock_Password" Grid.Column="0" Text="Password:" Margin="0, 4, 8, 0" />
+                                    <PasswordBox Name="InputPasswordBox" Grid.Column="1" PasswordRevealMode="Hidden" />
+                                    <Button Grid.Column="2" Margin="4, 0, 0, 0" Click="CopyPassword"> 
+                                        <StackPanel Orientation="Horizontal">
+                                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8C8;" />
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                                <Grid>
+                                    <CheckBox x:Uid="RevealModeCheckBox" Name="RevealModeCheckBox" Content="Show password" Grid.Column="2" Margin="0, 8, 0, 0" IsChecked="False" Checked="CheckBox_Changed" Unchecked="CheckBox_Changed" />
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                    <!-- メモ -->
+                    <Grid Grid.Row="1" RowDefinitions="Auto, *" Margin="0, 8, 0, 0">
+                        <TextBlock Grid.Row="0" Text="Memo" x:Uid="Memo" />
+                        <TextBox Grid.Row="1" AcceptsReturn="True" Margin="0, 8, 0, 0" Name="Memo" />
+                    </Grid>
+                    <Grid Grid.Row="2" Margin="0, 8, 0, 0">
+                        <!-- 保存 -->
+                        <Button Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Stretch" Click="Save">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE74E;" />
+                            </StackPanel>
+                        </Button>
+                        <TextBlock Visibility="Collapsed" x:Uid="URLIsNotSet" Name="URLIsNotSet" x:FieldModifier="Public" />
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,10 @@
+{
+    "profiles": {
+      "Nanohana (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "Nanohana (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+  }

@@ -1,49 +1,10 @@
-# WinUIExample
-WinUI3 アプリの例とインストーラーを作成する例です。
+# Nanohana
+パスワード管理ツール Nanohana
 
-![WinUI3 Screenshot](docs/screenshot01.png)
+|Dark|Light|
+|:--:|:--:|
+|![Dark Nanohana](docs/Dark.jpg)|![Light Nanohana](docs/Light.jpg)|
 
-## 開発
-`./dev.ps1` にコマンドをまとめています。
+ドキュメント (Documents) フォルダー下の `.nanohana` (隠しディレクトリ) にデータを保存します。OneDrive 等でドキュメントフォルダーが共有されている場合は、PC 間で同期されます。
 
-### アプリの実行
-```ps1
-./dev run
-```
-
-### インストーラーの作成
-インストーラー `install.exe` を作成します
-
-```ps1
-./dev pack
-```
-
-Install.exe を実行すると、インストーラーが起動します。
-コントロールパネルまたは設定からアンインストールができます。
-
-![](docs/screenshot02.png)
-
-### アプリの発行
-```ps1
-./dev publish
-```
-
-### アプリを ZIP ファイルにまとめる
-```ps1
-./dev zip
-```
-
-### インストール
-
-> [!NOTE]
-> レジストリには登録されないため、コントロールパネルまたは設定からアンインストールができません。
-
-```ps1
-./dev install
-```
-
-## アンインストール
-
-```ps1
-./dev uninstall
-```
+制作時間: 2 日

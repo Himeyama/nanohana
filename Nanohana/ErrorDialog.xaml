@@ -1,0 +1,14 @@
+<Page
+    x:Class="Nanohana.ErrorDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <StackPanel Orientation="Horizontal">
+            <Grid Margin="0, 2, 0, 0">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB90;" Foreground="#E60F22" />
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEA39;" Foreground="White" />
+            </Grid>
+            <TextBlock x:Uid="Error" Name="Error" Margin="8, 0, 0, 0" />
+        </StackPanel>
+    </StackPanel>
+</Page>

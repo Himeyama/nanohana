@@ -1,11 +1,11 @@
-﻿$csproj = ".\WinUIExample\WinUIExample.csproj"
-$appName = "WinUIExample"
+﻿$csproj = ".\Nanohana\Nanohana.csproj"
+$appName = "Nanohana"
 $publisher = "ひかり"
-$execFile = "WinUIExample.exe"
+$execFile = "Nanohana.exe"
 $version = (Get-Date).ToString("yy.M.d")
 $date = (Get-Date).ToString("yyyyMMdd")
-$publishDir = "WinUIExample\publish"
-$muiIcon = "WinUIExample\Assets\App.ico"
+$publishDir = "Nanohana\publish"
+$muiIcon = "Nanohana\Assets\App.ico"
 $size = [Math]::Round((Get-ChildItem $publishDir -Force -Recurse -ErrorAction SilentlyContinue | Measure-Object Length -Sum).Sum / 1KB, 0, [MidpointRounding]::AwayFromZero)
 
 $startMenuPath = [Environment]::GetFolderPath("Programs")
@@ -15,6 +15,18 @@ $appPath = "$env:localappdata\$appName"
 $startMenuPath = "$startMenuPath\${appName}"
 
 $arg = $Args[0]
+
+function Remove-Dir($directoryPath){
+    if (Test-Path $directoryPath) {
+        Remove-Item -Path $directoryPath -Recurse -Force
+    }
+}
+
+function Clear(){
+    Remove-Dir "Nanohana\bin"
+    Remove-Dir "Nanohana\obj"
+    Remove-Dir "Nanohana\publish"
+}
 
 function CreateShortcut($link, $target) {
     $WshShell = New-Object -ComObject WScript.Shell
@@ -28,7 +40,7 @@ function Run() {
 }
 
 function Publish() {
-    $null = dotnet publish $csproj -c Release -p:Version=$version
+    $null = dotnet publish $csproj -c Release -p:Version=$version -r x64 -p:PublishTrimmed=true
 }
 
 function Zip() {
@@ -73,7 +85,7 @@ function Uninstall() {
 
 function Pack() {
     Publish
-    .'C:\Program Files (x86)\NSIS\makensis.exe' /DVERSION="$version" /DDATE="$date" /DSIZE="$size" /DMUI_ICON="$muiIcon" /DPUBLISH_DIR="$publishDir" /DPRODUCT_NAME="$appName" /DEXEC_FILE="$execFile" /DPUBLISHER="$publisher" installer.nsh
+    .'C:\Program Files (x86)\NSIS\makensis.exe' /DVERSION="$version" /DDATE="$date" /DSIZE="$size" /DMUI_ICON="$muiIcon" /DMUI_UNICON="$muiIcon" /DPUBLISH_DIR="$publishDir" /DPRODUCT_NAME="$appName" /DEXEC_FILE="$execFile" /DPUBLISHER="$publisher" installer.nsh
 }
 
 
