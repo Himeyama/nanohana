@@ -22,7 +22,7 @@ function Remove-Dir($directoryPath){
     }
 }
 
-function Clear(){
+function Clear-Dir(){
     Remove-Dir "Nanohana\bin"
     Remove-Dir "Nanohana\obj"
     Remove-Dir "Nanohana\publish"
@@ -40,7 +40,9 @@ function Run() {
 }
 
 function Publish() {
-    $null = dotnet publish $csproj -c Release -p:Version=$version -r x64 -p:PublishTrimmed=true
+    Stop-Process -Name Nanohana -ErrorAction SilentlyContinue
+    Clear-Dir
+    dotnet publish $csproj -o $publishDir -c Release -p:Version=$version -r win-x64
 }
 
 function Zip() {
