@@ -82,3 +82,5 @@ Section "Uninstall"
     # レジストリ キーを削除
     DeleteRegKey HKLM "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\${PRODUCT_NAME}"
 SectionEnd
+
+RequestExecutionLevel user

@@ -84,12 +84,12 @@ public sealed partial class MainWindow : Window
 
     void CopyId(object sender, RoutedEventArgs e)
     {
-        CopyToClipboard(loginItem.Id);
+        CopyToClipboard(UserId.Text);
     }
 
     void CopyPassword(object sender, RoutedEventArgs e)
     {
-        CopyToClipboard(loginItem.Password);
+        CopyToClipboard(InputPasswordBox.Password);
     }
 
     void ClickEditSite(object sender, RoutedEventArgs e)
