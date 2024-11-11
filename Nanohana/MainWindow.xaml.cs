@@ -114,10 +114,16 @@ public sealed partial class MainWindow : Window
     void ClickUpdateSite(object sender, RoutedEventArgs e)
     {
         string site = EditSite.Text;
-        if (site == "")
+
+        if(site == "" && loginItem.Site == "")
         {
             ShowErrorDialog(URLIsNotEntered.Text);
             return;
+        }
+
+        if (site == "")
+        {
+            site = loginItem.Site;
         }
         try{
             LinkButton.NavigateUri = new Uri(site);
@@ -204,7 +210,7 @@ public sealed partial class MainWindow : Window
         UpdateSite.Visibility = Visibility.Collapsed;
         LinkButton.Visibility = Visibility.Visible;
         EditSiteButton.Visibility = Visibility.Visible;
-        LoginItem loginItem = new();
+        loginItem = new();
         UpdateUI(loginItem);
         LinkButton.Content = SetTheURL.Text;
         InputPasswordBox.PasswordRevealMode = PasswordRevealMode.Hidden;
