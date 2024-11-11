@@ -160,10 +160,12 @@ public sealed partial class MainWindow : Window
         try
         {
             LinkButton.NavigateUri = new Uri(loginItem.Site);
+            EditSite.Text = loginItem.Site;            
         }
         catch
         {
             LinkButton.NavigateUri = null;
+            EditSite.Text = "";
         }
         UserId.Text = loginItem.Id;
         InputPasswordBox.Password = loginItem.Password;
@@ -174,7 +176,7 @@ public sealed partial class MainWindow : Window
     {
         if (e.ClickedItem is LoginItem _loginItem)
         {
-            LoginItem loginItem = new()
+            loginItem = new()
             {
                 Site = _loginItem.Site,
                 Id = _loginItem.Id,
