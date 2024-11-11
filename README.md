@@ -1,4 +1,6 @@
 # Nanohana
+日本語 | [English](README.en.md)
+
 パスワード管理ツール Nanohana
 
 |Dark|Light|
