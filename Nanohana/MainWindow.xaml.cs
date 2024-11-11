@@ -183,6 +183,10 @@ public sealed partial class MainWindow : Window
             };
             UpdateUI(loginItem);
         }
+        EditSite.Visibility = Visibility.Collapsed;
+        UpdateSite.Visibility = Visibility.Collapsed;
+        LinkButton.Visibility = Visibility.Visible;
+        EditSiteButton.Visibility = Visibility.Visible;
     }
 
     void ShowErrorDialog(string message)
