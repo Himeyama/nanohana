@@ -187,6 +187,8 @@ public sealed partial class MainWindow : Window
         UpdateSite.Visibility = Visibility.Collapsed;
         LinkButton.Visibility = Visibility.Visible;
         EditSiteButton.Visibility = Visibility.Visible;
+        InputPasswordBox.PasswordRevealMode = PasswordRevealMode.Hidden;
+        RevealModeCheckBox.IsChecked = false;
     }
 
     void ShowErrorDialog(string message)
@@ -194,11 +196,26 @@ public sealed partial class MainWindow : Window
         ErrorDialog.Show(this, message);
     }
 
+    void Clear(object sender, RoutedEventArgs e)
+    {
+        EditSite.Visibility = Visibility.Collapsed;
+        UpdateSite.Visibility = Visibility.Collapsed;
+        LinkButton.Visibility = Visibility.Visible;
+        EditSiteButton.Visibility = Visibility.Visible;
+        LoginItem loginItem = new();
+        UpdateUI(loginItem);
+        LinkButton.Content = SetTheURL.Text;
+        InputPasswordBox.PasswordRevealMode = PasswordRevealMode.Hidden;
+        RevealModeCheckBox.IsChecked = false;
+
+    }
+
     void Save(object sender, RoutedEventArgs e)
     {
         loginItem.Id = UserId.Text;
         loginItem.Password = InputPasswordBox.Password;
         loginItem.Site = LinkButton.Content as string;
+        loginItem.Memo = Memo.Text;
 
         if(loginItem.Site == SetTheURL.Text)
         {

@@ -118,11 +118,23 @@
                     </Grid>
                     <Grid Grid.Row="2" Margin="0, 8, 0, 0">
                         <!-- 保存 -->
-                        <Button Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Stretch" Click="Save">
-                            <StackPanel Orientation="Horizontal">
-                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE74E;" />
-                            </StackPanel>
-                        </Button>
+                        <Grid ColumnDefinitions="*, *">
+                            <Button Grid.Column="0" Margin="0, 0, 4, 0" HorizontalAlignment="Stretch" Click="Clear">
+                                <StackPanel Orientation="Horizontal">
+                                    <Grid>
+                                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE82C;" Foreground="#58AFD7" />
+                                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xED61;" />
+                                    </Grid>
+                                </StackPanel>
+                            </Button>
+                            <Button Grid.Column="1" Margin="4, 0, 0, 0" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Stretch" Click="Save">
+                                <StackPanel Orientation="Horizontal">
+                                    <Grid>
+                                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE74E;" />
+                                    </Grid>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
                         <TextBlock Visibility="Collapsed" x:Uid="URLIsNotSet" Name="URLIsNotSet" x:FieldModifier="Public" />
                     </Grid>
                 </Grid>
